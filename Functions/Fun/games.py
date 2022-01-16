@@ -51,12 +51,12 @@ class Games(commands.Cog):
     @commands.command()
     @is_me()
     async def coinflip(self, ctx):
-        embed = discord.Embed(title="HORNY",
-                              description="AHOY",
-                              color=0xff0000, type='image')
-        embed.add_field(name="Horny", value="AHOY")
-        await ctx.send(embed=embed)
-        # await ctx.send("Heads" if random.randint(1, 2) == 1 else "Tails")
+        # embed = discord.Embed(title="HORNY",
+        #                       description="AHOY",
+        #                       color=0xff0000, type='image')
+        # embed.add_field(name="Horny", value="AHOY")
+        # await ctx.send(embed=embed)
+        await ctx.send("Heads" if random.randint(1, 2) == 1 else "Tails")
 
 
 def setup(bot):

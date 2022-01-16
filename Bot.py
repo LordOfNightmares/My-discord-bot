@@ -7,19 +7,33 @@ from settings import Settings
 
 intents = discord.Intents.default()
 pre_settings = {"bot": {"help_command": None, "intents": intents},
-                "selfbot": {"help_command": None, "self_bot": True}}
+                "self": {"help_command": None, "self_bot": True}}
 client = commands.Bot(command_prefix=Settings.Prefix, **pre_settings[Settings.BOT_MODE])
 
 
-def load_cogs(client):
+def load_cogs(client, reload=False):
     for cog in Settings.cogs:
         try:
             logging.info(f"Loading cog {cog}")
-            client.load_extension(cog)
+            if reload:
+                client.reload_extension(cog)
+            else:
+                client.load_extension(cog)
             logging.info(f"Loaded cog {cog}")
         except Exception as e:
             exc = f"{type(e).__name__}: {e}"
             logging.exception(f"Failed to load cog {cog}\n{exc}")
+
+
+@client.event
+async def on_message(message):
+    """
+    Temporary implementation for reloading cogs
+    Future:
+    •implement testing Function command Cog
+    """
+    load_cogs(client, True)
+    await client.process_commands(message)
 
 
 @client.event
