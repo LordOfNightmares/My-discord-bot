@@ -3,10 +3,10 @@ from os import environ as env
 
 
 class Settings:
-    BOT_MODE="bot"
-    TOKEN = {"bot": {"token": env['TOKEN1']},
-             "selfbot": {"token": env['TOKEN2'],
-                    "bot": False}}
+    BOT_MODE = "bot"
+    TOKEN = env['TOKEN1']
+    TOKEN2 = env['TOKEN2']
+    myID = env['MyID']
     BotStatus = "Bakuretsu Bakuretsu la la la"
     Prefix = "."
     cogs: list = [
@@ -19,9 +19,3 @@ class Settings:
         # "Functions.Admin.admin"
         "Functions.Test.test"
     ]
-
-
-class BotPresence:
-
-    def __init__(self):
-        pass

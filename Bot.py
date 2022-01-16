@@ -34,4 +34,7 @@ async def on_ready():
 
 
 if __name__ == '__main__':
-    client.run(**Settings.TOKEN[Settings.BOT_MODE])
+    if Settings.BOT_MODE == 'bot':
+        client.run(Settings.TOKEN)
+    else:
+        client.run(Settings.TOKEN, bot=False)

@@ -49,7 +49,7 @@ class Games(commands.Cog):
     #         await ctx.send("Game is being played now!")
 
     @commands.command()
-    @is_me(465180169997385740)
+    @is_me()
     async def coinflip(self, ctx):
         embed = discord.Embed(title="HORNY",
                               description="AHOY",
