@@ -1,1 +1,1 @@
-My-discord-bot
+Mydiscord-bot

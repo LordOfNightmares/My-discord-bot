@@ -1,0 +1,7 @@
+# py-cord
+# py-cord[speed]
+# discord-py-slash-command
+beautifulsoup4
+urllib3
+requests
+Pillow
