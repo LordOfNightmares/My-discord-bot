@@ -6,13 +6,9 @@ from discord.ext import commands
 from settings import Settings
 
 intents = discord.Intents.default()
-bot = {"help_command": None,
-       "intents": intents}
-selfbot = {"help_command": None,
-           "self_bot": True}
-client = commands.Bot(command_prefix=Settings.Prefix,
-                      help_command=None,
-                      self_bot=True)
+pre_settings = {"bot": {"help_command": None, "intents": intents},
+                "selfbot": {"help_command": None, "self_bot": True}}
+client = commands.Bot(command_prefix=Settings.Prefix, **pre_settings[Settings.BOT_MODE])
 
 
 def load_cogs(client):
@@ -37,4 +33,5 @@ async def on_ready():
     load_cogs(client)
 
 
-client.run(Settings.TOKEN, bot=False)
+if __name__ == '__main__':
+    client.run(**Settings.TOKEN[Settings.BOT_MODE])
