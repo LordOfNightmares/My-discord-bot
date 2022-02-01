@@ -7,9 +7,8 @@ RUN pacman -Syu python python-pip git --noconfirm
 FROM base
 # 
 
-RUN git clone --recursive https://github.com/LordOfNightmares/My-discord-bot.git bot
-WORKDIR /bot
+RUN git clone https://github.com/LordOfNightmares/My-discord-bot bot
+WORKDIR bot
 RUN python -m pip install -r requirements.txt --no-cache-dir
-
-ENTRYPOINT "python bot.py"
+CMD ["python bot.py"]
 

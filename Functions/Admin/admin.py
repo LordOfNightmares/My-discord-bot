@@ -16,9 +16,9 @@ class admin(commands.Cog):
     @slash_command(description="AHOY")
     async def test_mode(self, ctx):
         if Settings.TEST_MODE:
-            Settings.TEST_MODE = True
-        else:
             Settings.TEST_MODE = False
+        else:
+            Settings.TEST_MODE = True
         await ctx.respond(f"Test Mode on {ctx.author}!")
 
 
