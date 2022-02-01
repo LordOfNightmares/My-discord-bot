@@ -8,7 +8,7 @@ from settings import Settings
 intents = discord.Intents.default()
 pre_settings = {"bot": {"help_command": None, "intents": intents},
                 "self": {"help_command": None, "self_bot": True}}
-client = commands.Bot(command_prefix=Settings.Prefix, **pre_settings[Settings.BOT_MODE])
+client = commands.Bot(command_prefix=Settings.Prefix, **pre_settings[Settings.BOT_START_MODE])
 
 
 def load_cogs(client, reload=False):
@@ -32,7 +32,8 @@ async def on_message(message):
     Future:
     •implement testing Function command Cog
     """
-    load_cogs(client, True)
+    if Settings.TEST_MODE:
+        load_cogs(client, True)
     await client.process_commands(message)
 
 
@@ -48,7 +49,7 @@ async def on_ready():
 
 
 if __name__ == '__main__':
-    if Settings.BOT_MODE == 'bot':
+    if Settings.BOT_START_MODE == 'bot':
         client.run(Settings.TOKEN)
     else:
         client.run(Settings.TOKEN, bot=False)

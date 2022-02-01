@@ -1,5 +1,5 @@
 from discord.ext import commands
-
+from discord import slash_command
 
 class misc(commands.Cog):
     def __init__(self, bot):

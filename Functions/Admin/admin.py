@@ -1,6 +1,8 @@
-import random
-
+from discord import slash_command
 from discord.ext import commands
+
+from methods.wrappers import is_me
+from settings import Settings
 
 
 class admin(commands.Cog):
@@ -8,14 +10,16 @@ class admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command()
-    @commands.has_permissions(administrator=True)
     @commands.guild_only()
-    async def giveaway(self, ctx):
-        """
-        Picks a random user from the server to win your giveaway.
-        """
-        await ctx.send(f"Winner: {random.choice(ctx.guild.members).mention}")
+    @is_me()
+    @commands.has_permissions(administrator=True)
+    @slash_command(description="AHOY")
+    async def test_mode(self, ctx):
+        if Settings.TEST_MODE:
+            Settings.TEST_MODE = True
+        else:
+            Settings.TEST_MODE = False
+        await ctx.respond(f"Test Mode on {ctx.author}!")
 
 
 def setup(bot):

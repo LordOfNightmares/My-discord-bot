@@ -3,7 +3,7 @@
 import discord
 from discord.ext import commands
 
-from methods.my_methods import is_me
+from methods.wrappers import is_me
 
 
 # from discord_slash import cog_ext, SlashContext

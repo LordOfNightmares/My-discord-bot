@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  servpro:
+    image: dicord-bot:dev
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      # target: dev
+    container_name: useless-bot
+    restart: always
+    ports:
+      - "80:80"
+    volumes:
+      - ./config:/ygopro-server/config
+      - ./patch:/ygopro-server/ygopro/patch
+      - ./manual:/ygopro-server/ygopro/manual
+    entrypoint: ["execute.sh"]
+    logging: 
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
