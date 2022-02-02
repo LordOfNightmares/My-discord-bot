@@ -3,6 +3,7 @@ import logging
 import discord
 from discord.ext import commands
 
+from methods.default import get_guilds
 from settings import Settings
 
 intents = discord.Intents.default()
@@ -34,22 +35,37 @@ async def on_message(message):
     """
     if Settings.TEST_MODE:
         load_cogs(client, True)
+        Settings.Guilds = get_guilds(client)
     await client.process_commands(message)
 
 
 @client.event
 async def on_ready():
-    print("Bot is ready!")
     await client.change_presence(status=discord.Status.online,
                                  activity=discord.Game(Settings.BotStatus))
     logging.basicConfig(format='%(asctime)s| %(threadName)s | %(levelname)-5s| %(message)s',
                         level=logging.INFO,
                         datefmt="%H:%M:%S")
+    print("Bot is ready!")
+    # pprint([c for c in vars(client).items()])
+    Settings.Guilds = get_guilds(client)
     load_cogs(client)
+    print(f"Prefix commands:\n{[c.name for c in client.commands]}")
+    print(f"Pending slash(application) commands:\n```{[c.name for c in client.pending_application_commands]}")
 
 
-if __name__ == '__main__':
+
+
+
+def start():
     if Settings.BOT_START_MODE == 'bot':
         client.run(Settings.TOKEN)
     else:
         client.run(Settings.TOKEN, bot=False)
+
+
+if __name__ == '__main__':
+    try:
+        start()
+    except Exception:
+        raise

@@ -1,15 +1,19 @@
 # For Bot
 from os import environ as env
 
-from methods.zalgo import convert_zalgo
+from methods.other.zalgo import convert_zalgo
 
 
 class Settings:
     BOT_START_MODE = "bot"
     TEST_MODE = False
-    TOKEN = 'TOKEN1' in env and env['TOKEN1']
-    TOKEN2 = 'TOKEN2' in env and env['TOKEN2']
-    myID = 'MyID' in env and env['MyID']
+
+    if 'TOKEN1' in env:
+        TOKEN = env['TOKEN1']
+    if 'TOKEN2' in env:
+        TOKEN2 = env['TOKEN2']
+    if 'MyID' in env:
+        myID = env['MyID']
     BotStatus = convert_zalgo("Pain")
     Prefix = "."
     cogs: list = [
@@ -22,3 +26,4 @@ class Settings:
         "Functions.Admin.admin",
         "Functions.Test.test"
     ]
+    Guilds = []
