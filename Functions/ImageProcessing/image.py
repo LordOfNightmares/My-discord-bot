@@ -7,7 +7,7 @@ import discord
 import requests
 from discord.ext import commands
 
-from Functions.ImageProcessing.webp import image_convert, get_url_images_in_text
+from Functions.ImageProcessing.libs.webp import image_convert, get_url_images_in_text
 
 
 class Image(commands.Cog):

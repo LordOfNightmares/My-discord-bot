@@ -23,6 +23,7 @@ class Settings:
         # "Functions.Info.info",
         # "Functions.Misc.misc",
         # "Functions.NewMember.newmember",
+        "Functions.Fun.chan",
         "Functions.Admin.admin",
         "Functions.Test.test",
         "Functions.ImageProcessing.image"

@@ -3,7 +3,6 @@ from io import BytesIO
 
 from PIL import Image
 
-
 def get_url_images_in_text(text):
     '''finds image urls'''
     return re.findall(r'(https?:\/\/.*\.(?:png|jpg|webp|jiff|jpeg))', text)
