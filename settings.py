@@ -15,7 +15,7 @@ class Settings:
     if 'MyID' in env:
         myID = env['MyID']
     BotStatus = convert_zalgo("Pain")
-    Prefix = "."
+    Prefix = ".."
     cogs: list = [
         # "Functions.Fun.games",
         # "Functions.Fun.gameinfos",
@@ -24,6 +24,7 @@ class Settings:
         # "Functions.Misc.misc",
         # "Functions.NewMember.newmember",
         "Functions.Admin.admin",
-        "Functions.Test.test"
+        "Functions.Test.test",
+        "Functions.ImageProcessing.image"
     ]
     Guilds = []
