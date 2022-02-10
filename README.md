@@ -8,7 +8,8 @@ MyID=wsedrftgyhui32435
 
 Run:
 ```sh
-docker-compose up --build
+docker-compose build
+docker-compose up -d
 ```
 
 _rest is up to you_
