@@ -46,15 +46,12 @@ async def on_ready():
     logging.basicConfig(format='%(asctime)s| %(threadName)s | %(levelname)-5s| %(message)s',
                         level=logging.INFO,
                         datefmt="%H:%M:%S")
-    print("Bot is ready!")
+    logging.info("Bot is ready!")
     # pprint([c for c in vars(client).items()])
     Settings.Guilds = get_guilds(client)
     load_cogs(client)
-    print(f"Prefix commands:\n{[c.name for c in client.commands]}")
-    print(f"Pending slash(application) commands:\n```{[c.name for c in client.pending_application_commands]}")
-
-
-
+    logging.info(f"Prefix commands:\n{[c.name for c in client.commands]}")
+    logging.info(f"Pending slash(application) commands:\n```{[c.name for c in client.pending_application_commands]}")
 
 
 def start():
