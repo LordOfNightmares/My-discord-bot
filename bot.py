@@ -50,6 +50,7 @@ async def on_ready():
     # pprint([c for c in vars(client).items()])
     Settings.Guilds = get_guilds(client)
     load_cogs(client)
+    logging.info(f"Running on Guilds:\n{Settings.Guilds}")
     logging.info(f"Prefix commands:\n{[c.name for c in client.commands]}")
     logging.info(f"Pending slash(application) commands:\n```{[c.name for c in client.pending_application_commands]}")
 

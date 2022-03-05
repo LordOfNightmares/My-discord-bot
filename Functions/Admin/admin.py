@@ -1,15 +1,13 @@
 import discord
 from discord.ext import commands
 
-from bot import client
+from methods.errors import error_not_owner, error_permission
 from settings import Settings
 
 
 class admin(commands.Cog):
-
     def __init__(self, bot):
         self.bot = bot
-        print(Settings.Guilds)
 
     # @commands.guild_only()
     # @is_me()
@@ -22,27 +20,36 @@ class admin(commands.Cog):
     #         Settings.TEST_MODE = True
     #     await ctx.respond(f"Test Mode on {Settings.TEST_MODE}!", ephemeral=True)
 
-    @commands.command(help="Blah")
+    # @commands.command(help="Blah")
+    @commands.slash_command(guild_ids=Settings.Guilds, description="Current commands")
     async def current(self, ctx):
-        coms = [c.name for c in client.commands]
-        app_coms = [c.name for c in client.pending_application_commands]
         embed = discord.Embed(title="Commands", color=0xff0000)
         embed.add_field(name="Prefix commands",
-                        value=f"```{coms}```",
+                        value=f"```{[c.name for c in self.bot.commands]}```",
                         inline=False)
         embed.add_field(name="Pending slash(application) commands",
-                        value=f"```{app_coms}```",
+                        value=f"```{[c.name for c in self.bot.pending_application_commands]}```",
                         inline=False)
         await ctx.respond(embed=embed)
 
-    @commands.has_permissions(administrator=True)
-    @commands.slash_command(guild_ids=Settings.Guilds)
-    async def test_mode(self, ctx):
+    @commands.is_owner()
+    @commands.slash_command(guild_ids=Settings.Guilds, description="Owner Testing mode")
+    async def test(self, ctx):
         if Settings.TEST_MODE:
             Settings.TEST_MODE = False
         else:
             Settings.TEST_MODE = True
         await ctx.respond(f"Test Mode on {Settings.TEST_MODE}!", ephemeral=True)
+
+    @test.error
+    async def backup_error(self, ctx, error):
+        '''Handle a lack of permissions'''
+        if isinstance(error, commands.BotMissingPermissions):
+            await error_permission(ctx, attach=True)
+        elif isinstance(error, commands.NotOwner):
+            await error_not_owner(ctx)
+        else:
+            raise (type(error), error)
 
 
 def setup(bot):
